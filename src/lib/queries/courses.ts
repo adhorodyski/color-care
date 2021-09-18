@@ -6,11 +6,14 @@ export const GET_COURSES = gql`
             id
             date
             name
+            description
             price
             slug
             type
+            tickets
             images {
                 id
+                url
             }
         }
     }
@@ -22,11 +25,14 @@ export const GET_COURSE = gql`
             id
             date
             name
+            description
             price
             slug
             type
+            tickets
             images {
                 id
+                url
             }
         }
     }

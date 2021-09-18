@@ -7,7 +7,7 @@ export const useCourse = () => {
         name: course.name,
         description: course.description,
         price: course.price,
-        image: course.images[0],
+        images: course.images,
         currency: "PLN",
         price_data: {},
         product_data: {},

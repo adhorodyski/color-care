@@ -6,10 +6,10 @@ export const Header = () => {
     const { formattedTotalPrice } = useShoppingCart();
 
     return (
-        <header className="w-full">
-            <div className="container mx-auto flex justify-between items-center p-3">
+        <header className="w-full sticky top-0 bg-white">
+            <div className="container mx-auto flex justify-between items-center px-3 py-5">
                 <Link href="/">color-care</Link>
-                <nav className="flex gap-5">
+                <nav className="flex gap-6">
                     <Link href={"/szkolenia-stacjonarne"}>Szkolenia stacjonarne 👩‍🎨</Link>
                     <Link href={"/szkolenia-online"}>Szkolenia online 💻</Link>
                     <Link href={"/koszyk"} passHref>

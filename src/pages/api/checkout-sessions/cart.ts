@@ -2,17 +2,8 @@ import { NextApiHandler } from "next";
 import { Stripe } from "stripe";
 import { client } from "lib/apollo";
 import { GET_COURSE } from "lib/queries";
+import { mapToArray } from "lib/utils";
 import { Product } from "use-shopping-cart";
-
-const mapToArray = <T>(items: Record<string, T>) => {
-    let result = [];
-
-    for (const i in items) {
-        result.push(items[i]);
-    }
-
-    return result;
-};
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2020-08-27" });
 
@@ -31,7 +22,7 @@ const handler: NextApiHandler = async (req, res) => {
                     description: data.course.description,
                     images: data.course.images.map((img: any) => img.url),
                     metadata: {
-                        ...data.course,
+                        id: data.course.id,
                     },
                 },
             };
@@ -49,7 +40,7 @@ const handler: NextApiHandler = async (req, res) => {
             locale: "pl",
             payment_method_types: ["card", "p24"],
             success_url: `${req.headers.origin}/sukces?id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${req.headers.origin}/ups`,
+            cancel_url: `${req.headers.origin}/koszyk`,
             line_items,
         });
 
