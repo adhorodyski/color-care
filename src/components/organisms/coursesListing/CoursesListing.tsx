@@ -21,15 +21,15 @@ export const CoursesListing = () => {
             label: "Wszystkie",
             condition: () => true,
         },
-        online: {
-            key: "online",
-            label: "Online",
-            condition: (course: Course) => course.type === "online",
-        },
         offline: {
             key: "offline",
             label: "Stacjonarne",
             condition: (course: Course) => course.type === "offline",
+        },
+        online: {
+            key: "online",
+            label: "Online",
+            condition: (course: Course) => course.type === "online",
         },
     };
 

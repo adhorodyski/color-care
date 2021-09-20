@@ -13,5 +13,15 @@ export const useCourse = () => {
         product_data: {},
     });
 
-    return { courseToProduct };
+    const typeLabels = {
+        online: "Online",
+        offline: "Stacjonarne",
+    };
+
+    const difficultyLabels = {
+        basic: "Podstawowe",
+        advanced: "Zaawansowane",
+    };
+
+    return { courseToProduct, typeLabels, difficultyLabels };
 };

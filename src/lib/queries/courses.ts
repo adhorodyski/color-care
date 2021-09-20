@@ -11,6 +11,8 @@ export const GET_COURSES = gql`
             slug
             type
             tickets
+            difficulty
+            duration
             images {
                 id
                 url
@@ -30,6 +32,8 @@ export const GET_COURSE = gql`
             slug
             type
             tickets
+            difficulty
+            duration
             images {
                 id
                 url
