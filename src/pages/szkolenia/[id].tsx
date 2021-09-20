@@ -14,7 +14,7 @@ const Index: NextPage = () => {
     const { data, error } = useQuery<{ course: Course }>(GET_COURSE, {
         variables: { id: query.id },
     });
-    const { addItem, cartDetails } = useShoppingCart();
+    const { addItem, removeItem, cartDetails } = useShoppingCart();
     const { typeLabels, difficultyLabels } = useCourse();
     const { courseToProduct } = useCourse();
 
@@ -63,12 +63,19 @@ const Index: NextPage = () => {
                     <h5 className="text-2xl mb-8">
                         {formatCurrencyString({ value: data.course.price, currency: "pln" })}
                     </h5>
-                    {!cartDetails[data.course.id] && (
+                    {!cartDetails[data.course.id] ? (
                         <button
                             className="bg-black text-gray-100 px-5 py-2 rounded"
                             onClick={() => addItem(courseToProduct(data.course))}
                         >
                             Dodaj do koszyka
+                        </button>
+                    ) : (
+                        <button
+                            className="bg-black text-gray-100 px-5 py-2 rounded"
+                            onClick={() => removeItem(data.course.id)}
+                        >
+                            Usuń z koszyka
                         </button>
                     )}
                 </div>

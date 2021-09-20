@@ -6,7 +6,7 @@ export const Header = () => {
     const { formattedTotalPrice } = useShoppingCart();
 
     return (
-        <header className="w-full sticky top-0 bg-white">
+        <header className="w-full sticky top-0 bg-white z-10">
             <div className="container mx-auto flex justify-between items-center px-3 py-5">
                 <Link href="/">color-care</Link>
                 <nav className="flex gap-6">
