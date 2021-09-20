@@ -14,7 +14,7 @@ export const CourseItem: FC<CourseItemProps> = ({ href, course }) => {
     const { typeLabels, difficultyLabels } = useCourse();
 
     return (
-        <div className="flex mb-16">
+        <div className="flex">
             <Image
                 src={course.images[0].url}
                 alt={course.name}

@@ -4,6 +4,7 @@ import { GET_COURSES } from "lib/queries";
 import { CourseItem } from "components/molecules";
 import { useState } from "react";
 import { mapToArray } from "lib/utils";
+import { CoursesListingSkeleton } from "./CoursesListing.skeleton";
 
 type FilterTypes = "all" | "online" | "offline";
 
@@ -12,7 +13,7 @@ export const CoursesListing = () => {
     const [activeFilter, setActiveFilter] = useState<FilterTypes>("all");
 
     if (!data || error) {
-        return <p>Loading...</p>;
+        return <CoursesListingSkeleton />;
     }
 
     const filters: Record<FilterTypes, any> = {
@@ -48,7 +49,7 @@ export const CoursesListing = () => {
                     </button>
                 ))}
             </div>
-            <ul>
+            <ul className="flex flex-col gap-16">
                 {data.courses.filter(filters[activeFilter].condition).map((course: Course) => (
                     <li key={course.id}>
                         <CourseItem href={`/szkolenia/${course.id}`} course={course} />
