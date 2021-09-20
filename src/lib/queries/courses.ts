@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_COURSES = gql`
-    query GetCourses($type: CourseType) {
-        courses(where: { type: $type }) {
+    query GetCourses {
+        courses(orderBy: date_ASC) {
             id
             date
             name
@@ -20,7 +20,7 @@ export const GET_COURSES = gql`
 `;
 
 export const GET_COURSE = gql`
-    query GetCourse($id: ID) {
+    query GetCourse($id: ID!) {
         course(where: { id: $id }) {
             id
             date

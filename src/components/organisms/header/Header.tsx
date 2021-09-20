@@ -10,8 +10,7 @@ export const Header = () => {
             <div className="container mx-auto flex justify-between items-center px-3 py-5">
                 <Link href="/">color-care</Link>
                 <nav className="flex gap-6">
-                    <Link href={"/szkolenia-stacjonarne"}>Szkolenia stacjonarne 👩‍🎨</Link>
-                    <Link href={"/szkolenia-online"}>Szkolenia online 💻</Link>
+                    <Link href={"/szkolenia"}>Szkolenia 🎨</Link>
                     <Link href={"/koszyk"} passHref>
                         <a>Koszyk 🛍 ({formattedTotalPrice})</a>
                     </Link>

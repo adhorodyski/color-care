@@ -1,10 +1,10 @@
+import { useRouter } from "next/router";
 import { mapToArray } from "lib/utils";
 import { Course } from "lib/models";
+import { useFetch } from "lib/hooks";
 import { CartItem, CartSummary, EmptyState } from "components/molecules";
 // @ts-ignore
 import { useShoppingCart } from "use-shopping-cart";
-import { useFetch } from "lib/hooks";
-import { useRouter } from "next/router";
 
 export const Cart = () => {
     const { push } = useRouter();
@@ -13,7 +13,7 @@ export const Cart = () => {
     const { fetchPostJSON } = useFetch();
 
     const handleCheckout = async () => {
-        const res: any = await fetchPostJSON("/api/checkout-sessions/cart", cartDetails);
+        const res = await fetchPostJSON("/api/checkout-sessions/cart", cartDetails);
 
         if (res.statusCode === 500) {
             console.error(res.message);
@@ -31,17 +31,9 @@ export const Cart = () => {
                 primaryCTA={
                     <button
                         className="bg-black text-gray-100 px-5 py-2 rounded"
-                        onClick={() => push("/szkolenia-stacjonarne")}
+                        onClick={() => push("/szkolenia")}
                     >
-                        Stacjonarne
-                    </button>
-                }
-                secondaryCTA={
-                    <button
-                        className="bg-black text-gray-100 px-5 py-2 rounded"
-                        onClick={() => push("/szkolenia-online")}
-                    >
-                        Online
+                        Przeglądaj
                     </button>
                 }
             />

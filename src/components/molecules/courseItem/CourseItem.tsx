@@ -19,7 +19,7 @@ export const CourseItem: FC<CourseItemProps> = ({ href, course }) => (
             objectFit="cover"
             className="rounded-2xl"
         />
-        <div className="flex flex-col px-8">
+        <div className="flex flex-col px-8 select-none">
             {course.date && (
                 <p className="text-gray-400 mb-1">
                     {new Date(course.date).toLocaleString("pl", {
@@ -29,9 +29,11 @@ export const CourseItem: FC<CourseItemProps> = ({ href, course }) => (
                 </p>
             )}
             <Link href={href} passHref>
-                <a className="font-medium text-2xl mb-3">{course.name}</a>
+                <a className="font-medium text-2xl mb-3 hover:underline select-none">
+                    {course.name}
+                </a>
             </Link>
-            <p className="text-gray-400 text-xl">
+            <p className="text-gray-400 text-xl select-none">
                 {formatCurrencyString({ value: course.price, currency: "pln" })}
             </p>
         </div>
