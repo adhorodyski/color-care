@@ -39,7 +39,7 @@ const handler: NextApiHandler = async (req, res) => {
             mode: "payment",
             locale: "pl",
             payment_method_types: ["card", "p24"],
-            success_url: `${req.headers.origin}/sukces?id={CHECKOUT_SESSION_ID}`,
+            success_url: `${req.headers.origin}/sukces?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.origin}/koszyk`,
             line_items,
         });

@@ -14,16 +14,16 @@ export const CourseItem: FC<CourseItemProps> = ({ href, course }) => {
     const { typeLabels, difficultyLabels } = useCourse();
 
     return (
-        <div className="flex">
+        <div className="flex flex-col gap-6 md:gap-0 md:flex-row">
             <Image
                 src={course.images[0].url}
                 alt={course.name}
-                height={150}
+                height={200}
                 width={250}
                 objectFit="cover"
                 className="rounded-2xl"
             />
-            <div className="flex flex-col px-8 select-none">
+            <div className="flex flex-col md:px-8 select-none">
                 <div className="flex items-center gap-5 mb-3">
                     <span className="bg-green-100 text-green-900 py-1 px-2 uppercase font-bold text-xs rounded">
                         {typeLabels[course.type]}

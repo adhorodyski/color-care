@@ -8,6 +8,8 @@ import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
 import { GET_COURSE } from "lib/queries";
 import { useCourse } from "lib/hooks";
 import { Course } from "lib/models";
+import { PlusIcon } from "@heroicons/react/outline";
+import { MinusIcon } from "@heroicons/react/solid";
 
 const Index: NextPage = () => {
     const { query } = useRouter();
@@ -65,16 +67,18 @@ const Index: NextPage = () => {
                     </h5>
                     {!cartDetails[data.course.id] ? (
                         <button
-                            className="bg-black text-gray-100 px-5 py-2 rounded"
+                            className="bg-black text-gray-100 px-5 py-2 inline-flex items-center rounded"
                             onClick={() => addItem(courseToProduct(data.course))}
                         >
+                            <PlusIcon width={16} height={16} className="inline mr-2" />
                             Dodaj do koszyka
                         </button>
                     ) : (
                         <button
-                            className="bg-black text-gray-100 px-5 py-2 rounded"
+                            className="bg-black text-gray-100 px-5 py-2 inline-flex items-center rounded"
                             onClick={() => removeItem(data.course.id)}
                         >
+                            <MinusIcon width={16} height={16} className="inline mr-2" />
                             Usuń z koszyka
                         </button>
                     )}

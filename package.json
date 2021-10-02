@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.11",
+    "@heroicons/react": "^1.0.4",
     "@supabase/supabase-js": "^1.22.6",
     "graphql": "^15.5.3",
     "next": "11.1.2",
