@@ -25,10 +25,10 @@ export const CourseItem: FC<CourseItemProps> = ({ href, course }) => {
             />
             <div className="flex flex-col md:px-8 select-none">
                 <div className="flex items-center gap-5 mb-3">
-                    <span className="bg-green-100 text-green-900 py-1 px-2 uppercase font-bold text-xs rounded">
+                    <span className="bg-green-100 text-green-900 py-1 px-2 uppercase font-medium text-xs rounded">
                         {typeLabels[course.type]}
                     </span>
-                    <span className="bg-yellow-100 text-yellow-800 py-1 px-2 uppercase font-bold text-xs rounded">
+                    <span className="bg-yellow-100 text-yellow-800 py-1 px-2 uppercase font-medium text-xs rounded">
                         {difficultyLabels[course.difficulty]}
                     </span>
                 </div>

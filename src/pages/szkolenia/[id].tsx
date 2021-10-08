@@ -41,10 +41,10 @@ const Index: NextPage = () => {
 
                 <div>
                     <div className="flex gap-3 mb-8">
-                        <span className="bg-green-100 text-green-900 py-1 px-2 uppercase font-bold text-xs rounded">
+                        <span className="bg-green-100 text-green-900 py-1 px-2 uppercase font-medium text-xs rounded">
                             {typeLabels[data.course.type]}
                         </span>
-                        <span className="bg-yellow-100 text-yellow-800 py-1 px-2 uppercase font-bold text-xs rounded">
+                        <span className="bg-yellow-100 text-yellow-800 py-1 px-2 uppercase font-medium text-xs rounded">
                             {difficultyLabels[data.course.difficulty]}
                         </span>
                     </div>

@@ -3,16 +3,18 @@ import Link from "next/link";
 import { useShoppingCart } from "use-shopping-cart";
 
 export const Header = () => {
-    const { formattedTotalPrice } = useShoppingCart();
+    const { cartCount } = useShoppingCart();
 
     return (
         <header className="w-full sticky top-0 bg-white z-10">
             <div className="container mx-auto flex justify-between items-center px-3 py-5">
-                <Link href="/">color-care</Link>
+                <Link href="/" passHref>
+                    <a className="text-xl font-bold">color_care</a>
+                </Link>
                 <nav className="flex gap-6">
-                    <Link href={"/szkolenia"}>Szkolenia 🎨</Link>
+                    <Link href={"/szkolenia"}>Szkolenia</Link>
                     <Link href={"/koszyk"} passHref>
-                        <a>Koszyk 🛍 ({formattedTotalPrice})</a>
+                        <a>Koszyk ({cartCount})</a>
                     </Link>
                 </nav>
             </div>

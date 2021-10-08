@@ -1,13 +1,19 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+// @ts-ignore
+import { useShoppingCart } from "use-shopping-cart";
 import { CheckCircleIcon, ArrowNarrowLeftIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Index: NextPage = () => {
     const { query } = useRouter();
+    const { clearCart } = useShoppingCart();
 
     console.log(`Session ID: ${query.session_id}`);
+
+    useEffect(() => clearCart(), [clearCart]);
 
     return (
         <>

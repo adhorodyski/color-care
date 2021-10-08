@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { EmptyState } from "components/molecules";
 
 const Index: NextPage = () => (
     <>
         <Head>
             <title>color-care</title>
         </Head>
-        hejkaaa
+        <EmptyState title="Trwają prace 👩🏼‍🏭" description="Sklep nie jest jeszcze dostępny." />
     </>
 );
 
