@@ -6,21 +6,27 @@ export const Newsletter = () => {
     const { fetchPostJSON } = useFetch();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
+    const [error, setError] = useState(false);
     const [subscribed, setSubscribed] = useState(false);
 
     const onSubscribe = async (e: any) => {
         e.preventDefault();
-        await fetchPostJSON("/api/newsletter/subscribe", { email, name });
-        // TODO add error handling
+        const res = await fetchPostJSON("/api/newsletter/subscribe", { email, name });
+
+        if (res.error) {
+            setError(true);
+            return;
+        }
+
         setSubscribed(true);
     };
 
-    const perks = ["Zero spamu.", "Rezygnujesz kiedy chcesz."];
+    const perks = ["Zero spamu", "Rezygnujesz kiedy chcesz"];
 
     return (
-        <div className="flex justify-center">
+        <div>
             {!subscribed ? (
-                <div className="w-full md:w-auto">
+                <div className="w-full">
                     <ul className="flex flex-col gap-3 mb-12">
                         {perks.map((perk, idx) => (
                             <li key={idx} className="flex gap-2 text-gray-400">
@@ -29,40 +35,39 @@ export const Newsletter = () => {
                             </li>
                         ))}
                     </ul>
-                    <form
-                        className="flex flex-col md:flex-row md:items-end gap-6 md:gap-4"
-                        onSubmit={onSubscribe}
-                    >
-                        <div className="flex flex-col">
-                            <label className="text-sm text-gray-400">Imię</label>
-                            <input
-                                autoFocus
-                                value={name}
-                                placeholder="Maria"
-                                className="border-2 rounded focus:outline-none focus:border-black text-black w-full md:w-44 p-2 h-12"
-                                onChange={({ target }) => setName(target.value)}
-                            />
-                        </div>
-                        <div className="flex flex-col">
-                            <label className="text-sm text-gray-400">Email</label>
-                            <input
-                                type="email"
-                                value={email}
-                                placeholder="miwanska@mail.com"
-                                className="border-2 rounded focus:outline-none focus:border-black text-black w-full md:w-80 p-2 h-12"
-                                onChange={({ target }) => setEmail(target.value)}
-                            />
-                        </div>
+                    <form className="flex flex-col md:flex-row gap-4" onSubmit={onSubscribe}>
+                        <input
+                            required
+                            autoFocus
+                            placeholder="Twoje imię"
+                            value={name}
+                            onChange={({ target }) => setName(target.value)}
+                            className="border-2 rounded focus:outline-none focus:border-black text-black w-full md:w-44 p-2 h-12"
+                        />
+                        <input
+                            required
+                            type="email"
+                            placeholder="Twój adres email"
+                            value={email}
+                            onChange={({ target }) => setEmail(target.value)}
+                            className="border-2 rounded focus:outline-none focus:border-black text-black w-full md:w-80 p-2 h-12 mb-6 md:mb-0"
+                        />
                         <button
-                            className="bg-black text-gray-100 text-center px-8 py-2 h-12 rounded"
                             type="submit"
+                            className="bg-black focus:outline-none text-gray-100 text-center px-8 py-2 rounded h-12"
                         >
-                            Dołącz
+                            Zapisuję się
                         </button>
                     </form>
+                    {error && (
+                        <p className="text-sm text-red-500 mt-6">
+                            🤷🏼‍♀️ Nie udało mi się dopisać Cię do listy. Odezwij się do mnie (kontakt
+                            jest w stopce) - postaram się pomóc.
+                        </p>
+                    )}
                 </div>
             ) : (
-                <h4 className="text-2xl font-medium">Dziękuję za dołączenie do newslettera! 🎉</h4>
+                <h4 className="text-2xl font-medium">Dziękuję za dołączenie! 🎉</h4>
             )}
         </div>
     );
