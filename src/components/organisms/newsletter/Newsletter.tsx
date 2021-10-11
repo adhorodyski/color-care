@@ -11,9 +11,7 @@ export const Newsletter = () => {
     const onSubscribe = async (e: any) => {
         e.preventDefault();
         await fetchPostJSON("/api/newsletter/subscribe", { email, name });
-
         // TODO add error handling
-
         setSubscribed(true);
     };
 
