@@ -7,7 +7,7 @@ const Index: NextPage = () => (
         <Head>
             <title>color-care 💅🏼</title>
         </Head>
-        <div className="mx-auto md:my-32 w-full md:w-1/2">
+        <div className="md:my-32">
             <Newsletter />
         </div>
     </>

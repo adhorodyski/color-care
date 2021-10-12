@@ -3,6 +3,7 @@ import Head from "next/head";
 import { Post } from "lib/models";
 import { client } from "lib/apollo";
 import { GET_POSTS } from "lib/queries";
+import { PostsListing } from "components/organisms";
 
 interface PageProps {
     posts: Post[];
@@ -14,7 +15,7 @@ const Index: NextPage<PageProps> = ({ posts }) => (
             <title>color-care | Blog</title>
         </Head>
         <h1 className="text-4xl font-bold mb-8">Blog</h1>
-        <pre>{JSON.stringify(posts, null, 2)}</pre>
+        <PostsListing posts={posts} />
     </>
 );
 

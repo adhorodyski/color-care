@@ -7,6 +7,7 @@ export const GET_POSTS = gql`
             slug
             title
             description
+            publishedAt
         }
     }
 `;
@@ -19,6 +20,7 @@ export const GET_POST = gql`
             title
             description
             body
+            publishedAt
             author {
                 name
                 avatar {

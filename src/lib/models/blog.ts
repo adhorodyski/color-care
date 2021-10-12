@@ -13,4 +13,5 @@ export interface Post {
     title: string;
     description?: string;
     body: string;
+    publishedAt: string;
 }
