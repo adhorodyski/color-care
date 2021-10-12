@@ -8,19 +8,16 @@ mailchimp.setConfig({
 });
 
 const handler: NextApiHandler = async (req, res) => {
-    const { email, name } = req.body;
+    const { email } = req.body;
 
-    if (!email || !name) {
-        return res.status(400).json({ error: "Name and email fields are required." });
+    if (!email) {
+        return res.status(400).json({ error: "Email field is required." });
     }
 
     try {
         await mailchimp.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {
             status: "subscribed",
             email_address: email,
-            merge_fields: {
-                FNAME: name,
-            },
         });
 
         return res.status(201).json({ error: "" });
