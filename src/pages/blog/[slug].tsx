@@ -19,7 +19,13 @@ const Index: NextPage<PageProps> = ({ post, source }) => (
         </Head>
         <h1 className="text-4xl font-bold mb-8">{post.title}</h1>
         <div className="flex items-center gap-4 mb-12">
-            <Image src={post.author.avatar.url} height={24} width={24} className="rounded-full" />
+            <Image
+                src={post.author.avatar.url}
+                alt={post.author.name}
+                height={24}
+                width={24}
+                className="rounded-full"
+            />
             <p className="text-sm text-gray-600">
                 {post.author.name} / {new Date(post.publishedAt).toLocaleDateString()}
             </p>
@@ -53,10 +59,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const res = await client.query({ query: GET_POSTS });
-    const posts = res.data.posts;
+    const { data } = await client.query({ query: GET_POSTS });
 
-    const paths = posts.map(({ slug }: Post) => ({ params: { slug } }));
+    const paths = data.posts.map(({ slug }: Post) => ({ params: { slug } }));
 
     return {
         paths,
