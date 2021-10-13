@@ -53,9 +53,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const { data } = await client.query({ query: GET_POSTS });
+    const res = await client.query({ query: GET_POSTS });
+    const posts = res.data.posts;
 
-    const paths = data.posts.map(({ slug }: Post) => ({ params: { slug } }));
+    const paths = posts.map(({ slug }: Post) => ({ params: { slug } }));
 
     return {
         paths,
