@@ -1,20 +1,16 @@
-import { useQuery } from "@apollo/client";
 import { Course } from "lib/models";
-import { GET_COURSES } from "lib/queries";
 import { CourseItem } from "components/molecules";
 import { useState } from "react";
 import { mapToArray } from "lib/utils";
-import { CoursesListingSkeleton } from "./CoursesListing.skeleton";
 
 type FilterTypes = "all" | "online" | "offline";
 
-export const CoursesListing = () => {
-    const { data, error } = useQuery(GET_COURSES);
-    const [activeFilter, setActiveFilter] = useState<FilterTypes>("all");
+interface CoursesListingProps {
+    courses: Course[];
+}
 
-    if (!data || error) {
-        return <CoursesListingSkeleton />;
-    }
+export const CoursesListing = ({ courses }: CoursesListingProps) => {
+    const [activeFilter, setActiveFilter] = useState<FilterTypes>("all");
 
     const filters: Record<FilterTypes, any> = {
         all: {
@@ -50,7 +46,7 @@ export const CoursesListing = () => {
                 ))}
             </div>
             <ul className="flex flex-col gap-16">
-                {data.courses.filter(filters[activeFilter].condition).map((course: Course) => (
+                {courses.filter(filters[activeFilter].condition).map((course: Course) => (
                     <li key={course.id}>
                         <CourseItem href={`/szkolenia/${course.id}`} course={course} />
                     </li>

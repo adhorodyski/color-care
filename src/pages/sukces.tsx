@@ -24,7 +24,7 @@ const Index: NextPage = () => {
                 <h1 className="text-4xl font-bold">Zamówienie opłacone</h1>
                 <CheckCircleIcon width={40} height={40} className="text-green-400" />
             </div>
-            <p className="text-gray-400 text-xl mb-16">
+            <p className="text-gray-500 text-xl mb-16">
                 Sprawdź swoją skrzynkę - czeka tam na Ciebie email z fakturą.
             </p>
             <Link passHref href="/">
