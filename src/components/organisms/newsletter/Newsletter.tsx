@@ -5,19 +5,18 @@ import { CheckIcon } from "@heroicons/react/outline";
 export const Newsletter = () => {
     const { fetchPostJSON } = useFetch();
     const [email, setEmail] = useState("");
-    const [error, setError] = useState(false);
-    const [subscribed, setSubscribed] = useState(false);
+    const [state, setState] = useState<"initial" | "error" | "subscribed">("initial");
 
     const onSubscribe = async (e: any) => {
         e.preventDefault();
         const res = await fetchPostJSON("/api/newsletter/subscribe", { email });
 
         if (res.error) {
-            setError(true);
+            setState("error");
             return;
         }
 
-        setSubscribed(true);
+        setState("subscribed");
     };
 
     const perks = ["Zero spamu", "Rezygnujesz kiedy chcesz"];
@@ -25,7 +24,7 @@ export const Newsletter = () => {
     return (
         <>
             <h1 className="mb-12 text-4xl font-medium">Newsletter</h1>
-            {!subscribed ? (
+            {state !== "subscribed" ? (
                 <>
                     <ul className="flex flex-col gap-3 mb-12">
                         {perks.map((perk, idx) => (
@@ -52,7 +51,7 @@ export const Newsletter = () => {
                             Dołącz
                         </button>
                     </form>
-                    {error && (
+                    {state === "error" && (
                         <p className="text-sm text-red-500 mt-6">
                             🤷🏼‍♀️ Nie udało mi się dopisać Cię do listy. Odezwij się do mnie (kontakt
                             jest w stopce) - postaram się pomóc.
