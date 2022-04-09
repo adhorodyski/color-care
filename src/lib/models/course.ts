@@ -1,14 +1,16 @@
 export type CourseType = "offline" | "online";
 export type CourseDifficulty = "basic" | "advanced";
 
+interface Image {
+    id: string;
+    url: string;
+}
+
 export interface Course {
     id: string;
     name: string;
     description: string;
-    images: {
-        id: string;
-        url: string;
-    }[];
+    images: Image[];
     price: number;
     slug: string;
     type: CourseType;

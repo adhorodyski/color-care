@@ -4,19 +4,19 @@ import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
-import { useCourse } from "lib/hooks";
-import { Course } from "lib/models";
 import { PlusIcon } from "@heroicons/react/outline";
 import { MinusIcon } from "@heroicons/react/solid";
+import { useCourse } from "lib/hooks";
+import { Course } from "lib/models";
 import { client } from "lib/apollo";
 import { GET_COURSE, GET_COURSES } from "lib/queries";
 
-interface PageProps {
+interface Props {
     course: Course;
     source: MDXRemoteSerializeResult;
 }
 
-const Index: NextPage<PageProps> = ({ course, source }) => {
+const Index: NextPage<Props> = ({ course, source }) => {
     const { addItem, removeItem, cartDetails } = useShoppingCart();
     const { typeLabels, difficultyLabels } = useCourse();
     const { courseToProduct } = useCourse();
@@ -81,9 +81,7 @@ const Index: NextPage<PageProps> = ({ course, source }) => {
             </section>
             <section>
                 <h2 className="text-3xl font-bold mb-8">O szkoleniu</h2>
-                <article className="prose prose-pink">
-                    <MDXRemote {...source} />
-                </article>
+                <article className="prose prose-pink">{/* <MDXRemote {...source} /> */}</article>
             </section>
         </>
     );

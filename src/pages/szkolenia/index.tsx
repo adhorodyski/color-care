@@ -5,11 +5,11 @@ import { client } from "lib/apollo";
 import { GET_COURSES } from "lib/queries";
 import { Course } from "lib/models";
 
-interface PageProps {
+interface Props {
     courses: Course[];
 }
 
-const Index: NextPage<PageProps> = ({ courses }) => (
+const Index: NextPage<Props> = ({ courses }) => (
     <>
         <Head>
             <title>color-care | Szkolenia</title>
