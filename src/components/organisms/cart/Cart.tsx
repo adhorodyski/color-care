@@ -3,7 +3,6 @@ import { mapToArray } from "lib/utils";
 import { Course } from "lib/models";
 import { useFetch } from "lib/hooks";
 import { CartItem, CartSummary, EmptyState } from "components/molecules";
-// @ts-ignore
 import { useShoppingCart } from "use-shopping-cart";
 
 export const Cart = () => {

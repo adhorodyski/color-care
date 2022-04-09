@@ -25,4 +25,5 @@ const MyApp: FC<AppProps & { Component: NextPageWithLayout }> = ({ Component, pa
         </ApolloProvider>
     );
 };
+
 export default MyApp;
