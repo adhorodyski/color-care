@@ -3,7 +3,7 @@ import { Stripe } from "stripe";
 import { client } from "lib/apollo";
 import { GET_COURSE } from "lib/queries";
 import { mapToArray } from "lib/utils";
-import { Product } from "use-shopping-cart";
+import { Product } from "use-shopping-cart/core";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2020-08-27" });
 

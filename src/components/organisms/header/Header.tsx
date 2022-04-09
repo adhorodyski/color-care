@@ -1,5 +1,4 @@
 import Link from "next/link";
-// @ts-ignore
 import { useShoppingCart } from "use-shopping-cart";
 
 export const Header = () => {
@@ -12,7 +11,6 @@ export const Header = () => {
                     <a className="text-xl font-bold">color_care</a>
                 </Link>
                 <nav className="flex gap-6">
-                    <Link href={"/blog"}>Blog</Link>
                     <Link href={"/szkolenia"}>Szkolenia</Link>
                     <Link href={"/koszyk"} passHref>
                         <a>Koszyk ({cartCount})</a>

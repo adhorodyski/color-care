@@ -1,4 +1,4 @@
-import { Product } from "use-shopping-cart";
+import { Product } from "use-shopping-cart/core";
 import { Course } from "lib/models";
 
 export const useCourse = () => {

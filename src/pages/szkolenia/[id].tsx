@@ -3,7 +3,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-// @ts-ignore
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
 import { useCourse } from "lib/hooks";
 import { Course } from "lib/models";
