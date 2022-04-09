@@ -1,10 +1,7 @@
+import { Image } from "./image";
+
 export type CourseType = "offline" | "online";
 export type CourseDifficulty = "basic" | "advanced";
-
-interface Image {
-    id: string;
-    url: string;
-}
 
 export interface Course {
     id: string;

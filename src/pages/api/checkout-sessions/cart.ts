@@ -1,9 +1,10 @@
 import { NextApiHandler } from "next";
 import { Stripe } from "stripe";
+import { Product } from "use-shopping-cart/core";
 import { client } from "lib/apollo";
+import { Image } from "lib/models";
 import { GET_COURSE } from "lib/queries";
 import { mapToArray } from "lib/utils";
-import { Product } from "use-shopping-cart/core";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2020-08-27" });
 
@@ -20,7 +21,7 @@ const handler: NextApiHandler = async (req, res) => {
                 product_data: {
                     name: data.course.name,
                     description: data.course.description,
-                    images: data.course.images.map((img: any) => img.url),
+                    images: data.course.images.map((img: Image) => img.url),
                     metadata: {
                         id: data.course.id,
                     },
