@@ -8,7 +8,7 @@ export interface Course {
     name: string;
     description: string;
     images: Image[];
-    price: number;
+    stripe_price_id: string;
     slug: string;
     type: CourseType;
     difficulty: CourseDifficulty;

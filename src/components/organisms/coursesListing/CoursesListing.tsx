@@ -5,30 +5,30 @@ import { mapToArray } from "lib/utils";
 
 type FilterTypes = "all" | "online" | "offline";
 
-interface CoursesListingProps {
+const filters: Record<FilterTypes, any> = {
+    all: {
+        key: "all",
+        label: "Wszystkie",
+        condition: () => true,
+    },
+    offline: {
+        key: "offline",
+        label: "Stacjonarne",
+        condition: (course: Course) => course.type === "offline",
+    },
+    online: {
+        key: "online",
+        label: "Online",
+        condition: (course: Course) => course.type === "online",
+    },
+};
+
+interface Props {
     courses: Course[];
 }
 
-export const CoursesListing = ({ courses }: CoursesListingProps) => {
+export const CoursesListing = ({ courses }: Props) => {
     const [activeFilter, setActiveFilter] = useState<FilterTypes>("all");
-
-    const filters: Record<FilterTypes, any> = {
-        all: {
-            key: "all",
-            label: "Wszystkie",
-            condition: () => true,
-        },
-        offline: {
-            key: "offline",
-            label: "Stacjonarne",
-            condition: (course: Course) => course.type === "offline",
-        },
-        online: {
-            key: "online",
-            label: "Online",
-            condition: (course: Course) => course.type === "online",
-        },
-    };
 
     return (
         <>

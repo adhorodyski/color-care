@@ -12,6 +12,7 @@
     "@apollo/client": "^3.5.10",
     "@heroicons/react": "^1.0.6",
     "@mailchimp/mailchimp_marketing": "^3.0.74",
+    "@stripe/stripe-js": "^1.27.0",
     "@tailwindcss/typography": "^0.5.2",
     "framer-motion": "^6.2.9",
     "graphql": "^16.3.0",
@@ -20,8 +21,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-loading-skeleton": "^3.0.3",
-    "stripe": "^8.216.0",
-    "use-shopping-cart": "^3.1.1"
+    "stripe": "^8.216.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

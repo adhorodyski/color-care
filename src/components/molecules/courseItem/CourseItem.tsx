@@ -3,14 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { Course } from "lib/models";
 import { useCourse } from "lib/hooks";
-import { formatCurrencyString } from "use-shopping-cart";
+import Stripe from "stripe";
 
-interface CourseItemProps {
+interface Props {
     href: string;
     course: Course;
+    // price: Stripe.Price;
 }
 
-export const CourseItem: FC<CourseItemProps> = ({ href, course }) => {
+export const CourseItem: FC<Props> = ({ href, course }) => {
     const { typeLabels, difficultyLabels } = useCourse();
 
     return (
@@ -45,7 +46,8 @@ export const CourseItem: FC<CourseItemProps> = ({ href, course }) => {
                     )}
                 </div>
                 <p className="text-gray-400 text-xl select-none">
-                    {formatCurrencyString({ value: course.price, currency: "pln" })}
+                    100 PLN
+                    {/* {`${price.unit_amount} ${price.currency}}`} */}
                 </p>
             </div>
         </div>

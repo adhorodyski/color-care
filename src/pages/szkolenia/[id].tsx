@@ -1,25 +1,36 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import { Stripe } from "stripe";
 import Head from "next/head";
 import Image from "next/image";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
-import { PlusIcon } from "@heroicons/react/outline";
-import { MinusIcon } from "@heroicons/react/solid";
-import { useCourse } from "lib/hooks";
+import { ShoppingBagIcon } from "@heroicons/react/solid";
+import { GET_COURSE, GET_COURSES } from "lib/queries";
+import { useCourse, useFetch } from "lib/hooks";
+import { formatCurrencyString } from "lib/utils";
 import { Course } from "lib/models";
 import { client } from "lib/apollo";
-import { GET_COURSE, GET_COURSES } from "lib/queries";
+import { stripe } from "lib/stripe";
 
 interface Props {
     course: Course;
+    price: Stripe.Price;
     source: MDXRemoteSerializeResult;
 }
 
-const Index: NextPage<Props> = ({ course, source }) => {
-    const { addItem, removeItem, cartDetails } = useShoppingCart();
+const Index: NextPage<Props> = ({ course, price, source }) => {
     const { typeLabels, difficultyLabels } = useCourse();
-    const { courseToProduct } = useCourse();
+    const { fetchPostJSON } = useFetch();
+
+    const handleCheckout = async () => {
+        const session = await fetchPostJSON("/api/checkout-sessions/course", course);
+
+        if (!session) {
+            console.error(`Failed creating a Stripe Checkout session.`);
+        }
+
+        await stripe?.redirectToCheckout({ sessionId: session.id });
+    };
 
     return (
         <>
@@ -58,25 +69,15 @@ const Index: NextPage<Props> = ({ course, source }) => {
                         <p className="text-xl text-gray-400 mb-8">Ilość miejsc: {course.tickets}</p>
                     )}
                     <p className="text-2xl mb-8">
-                        {formatCurrencyString({ value: course.price, currency: "pln" })}
+                        {formatCurrencyString(price.currency, price.unit_amount!)}
                     </p>
-                    {!cartDetails[course.id] ? (
-                        <button
-                            className="bg-black text-gray-100 px-5 py-2 inline-flex items-center rounded"
-                            onClick={() => addItem(courseToProduct(course))}
-                        >
-                            <PlusIcon width={16} height={16} className="inline mr-2" />
-                            Dodaj do koszyka
-                        </button>
-                    ) : (
-                        <button
-                            className="bg-black text-gray-100 px-5 py-2 inline-flex items-center rounded"
-                            onClick={() => removeItem(course.id)}
-                        >
-                            <MinusIcon width={16} height={16} className="inline mr-2" />
-                            Usuń z koszyka
-                        </button>
-                    )}
+                    <button
+                        className="bg-black text-gray-100 px-5 py-2 inline-flex items-center rounded"
+                        onClick={handleCheckout}
+                    >
+                        <ShoppingBagIcon width={16} height={16} className="inline mr-2" />
+                        Kup teraz
+                    </button>
                 </div>
             </section>
             <section>
@@ -101,10 +102,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     const source = await serialize(data.course.description);
 
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2020-08-27" });
+
+    const price = await stripe.prices.retrieve(data.course.stripe_price_id);
+
     return {
         props: {
             course: data.course,
             source,
+            price,
         },
     };
 };

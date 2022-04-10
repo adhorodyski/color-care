@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { useFetch } from "lib/hooks";
 import { CheckIcon } from "@heroicons/react/outline";
 
@@ -8,7 +8,7 @@ export const Newsletter = () => {
     const [error, setError] = useState(false);
     const [subscribed, setSubscribed] = useState(false);
 
-    const onSubscribe = async (e: any) => {
+    const onSubscribe: FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         const res = await fetchPostJSON("/api/newsletter/subscribe", { email });
 
@@ -20,7 +20,11 @@ export const Newsletter = () => {
         setSubscribed(true);
     };
 
-    const perks = ["Zero spamu", "Rezygnujesz kiedy chcesz"];
+    const perks = [
+        "Zero spamu",
+        "Rezygnujesz kiedy chcesz",
+        "Pierwsza dowiadujesz się o promocjach",
+    ];
 
     return (
         <>
